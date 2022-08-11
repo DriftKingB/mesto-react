@@ -9,14 +9,12 @@ export default function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardCl
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.patchUserInfo(userName, userAbout)
+    api.getUserInfo()
       .then(data => {
         setUserName(data.name);
         setUserAbout(data.about);
+        setUserAvatar(data.avatar);
       })
-      .catch(err => console.log(err));
-    api.patchUserAvatar(userAvatar)
-      .then(data => setUserAvatar(data.avatar))
       .catch(err => console.log(err));
     api.getCohortCards()
       .then(data => setCards(data))
