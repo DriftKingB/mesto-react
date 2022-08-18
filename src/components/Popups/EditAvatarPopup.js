@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 
 export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
   const linkInput = useRef();
-  const [ inputErrorMessage, setInputErrorMessage ] = useState(null);
+  const linkInputError = useRef();
   const [ isValid, setIsValid ] = useState(false);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
   function clearFieldset() {
     const input = linkInput.current;
 
-    setInputErrorMessage(null);
+    linkInputError.textContent = '';
     input.value = null;
     input.classList.remove('popup__input_invalid');
   }
@@ -23,16 +23,10 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
     clearFieldset();
   }
 
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
-    onSubmit({ link: linkInput.current.value });
-  }
-
   function handleChange() {
     const input = linkInput.current;
 
-    setInputErrorMessage(input.validationMessage);
+    linkInputError.textContent = input.vaalidationMessage;
     if (!input.validity.valid) {
       input.classList.add('popup__input_invalid');
       setIsValid(false);
@@ -45,9 +39,10 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
   return(
     <PopupWithForm 
       onClose={onClose}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       isOpen={isOpen}
       isValid={isValid}
+      inputs={{link: linkInput.current?.value}}
       name="avatar-edit" 
       title="Обновить аватар" 
       submitText="Сохранить"
@@ -58,7 +53,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
             <input
             className="popup__input"
             ref={linkInput} name="avatar" id="avatar-link-input" type="url" placeholder="Ссылка на картинку" required onChange={handleChange} />
-            <span className="popup__input-error popup__input-error_type_avatar-link-input"> { inputErrorMessage } </span>
+            <span ref={linkInputError} className="popup__input-error popup__input-error_type_avatar-link-input"></span>
           </div>
         </fieldset>
       } 

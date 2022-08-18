@@ -4,7 +4,7 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
   const [isLoading, setIsLoading] = useState(false);
   const closeByEscapeCallBack = useCallback((evt) => {
     evt.key === 'Escape' && onClose();
-  }, [])
+  }, []);
   
   useEffect(() => {
     if (isOpen) {
