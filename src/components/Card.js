@@ -1,6 +1,24 @@
-export default function Card({ card, onCardClick }) {
+import React, { useContext, useState } from "react"
+import { CurrentUserContext } from "../contexts/CurrentUserContext"
+
+export default function Card({ card, onCardClick, onCardLike, onCardRemoval }) {
+  const currentUser = useContext(CurrentUserContext);
+  const madeByUser = currentUser._id === card.owner._id;
+  const likedByUser = card.likes.some(user => user._id === currentUser._id );
+  const [ isLoading, setIsLoading ] = useState(false);
+
   function handleCardClick() {
-    onCardClick(card)
+    onCardClick(card);
+  }
+
+  function handleCardLike() {
+    setIsLoading(true);
+    onCardLike(card)
+      .finally(() => { setIsLoading(false) });
+  }
+
+  function handleCardRemoval() {
+    onCardRemoval(card);
   }
 
   return (
@@ -11,12 +29,12 @@ export default function Card({ card, onCardClick }) {
       <div className="card__tab">
         <h2 className="card__title"> {card.name} </h2>
         <div className="card__likes">
-          <button className="card__like-button" type="button" />
-          <div className="card__loading-icon" />
-          <span className="card__likes-number"> {card.likes.length} </span>
+          <button className={`card__like-button ${likedByUser && "card__like-button_active"}`} type="button" onClick={handleCardLike} />
+          <div className={`card__loading-icon ${isLoading && "card__loading-icon_active"}`} />
+          <span className={`card__likes-number ${isLoading && "card__likes-number_inactive"}`}> {card.likes.length} </span>
         </div>
       </div>
-      <button className="card__delete-button" />
+      { madeByUser && <button className="card__delete-button" onClick={handleCardRemoval} /> }
     </article>
   )
 }

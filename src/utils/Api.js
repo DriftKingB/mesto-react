@@ -18,13 +18,13 @@ class Api {
       .then(this._checkResponse);
   }
 
-  postSectionItem(item) {
+  postSectionItem(cardName, cardLink) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: item.name,
-        link: item.link
+        name: cardName,
+        link: cardLink
       })
     })
       .then(this._checkResponse);

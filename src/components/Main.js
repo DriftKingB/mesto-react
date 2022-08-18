@@ -1,47 +1,36 @@
-import React, { useEffect, useState } from "react";
-import api from "../utils/Api";
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Card from "./Card";
 
-export default function Main({ onEditProfile, onEditAvatar, onAddPlace, onCardClick }) {
-  const [userName, setUserName] = useState('Жак-Ив Кусто');
-  const [userAbout, setUserAbout] = useState('Исследователь океана');
-  const [userAvatar, setUserAvatar] = useState('https://www.rgo.ru/sites/default/files/styles/head_image_article/public/1034295-e1477344635669-1.jpg?itok=4U4Dw9en');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api.getUserInfo()
-      .then(data => {
-        setUserName(data.name);
-        setUserAbout(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch(err => console.log(err));
-    api.getCohortCards()
-      .then(data => setCards(data))
-      .catch(err => console.log(err));
-  }, []);
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, cards, onCardClick, onCardLike, onCardRemoval }) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <div className="content"> 
       <section className="profile">
-        <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}>
+        <div className="profile__avatar" style={{ backgroundImage: `url(${currentUser.avatar})` }}>
           <button className="profile__avatar-button" onClick={onEditAvatar} />
         </div>
         <div className="profile__info">
-          <h1 className="profile__name"> {userName} </h1>
-          <p className="profile__subline"> {userAbout} </p>
+          <h1 className="profile__name"> {currentUser.name} </h1>
+          <p className="profile__subline"> {currentUser.about} </p>
           <button className="profile__edit-button" type="button" onClick={onEditProfile} />
         </div>
         <button className="profile__add-button" type="button" onClick={onAddPlace} />
       </section>
 
       <section className="album">
-        {cards.map((card) => <Card 
-          key={card._id} 
-          card={card} 
-          onCardClick={onCardClick} 
-          />
-        )}
+        <CurrentUserContext.Provider value={currentUser}>
+          {cards.map((card) => 
+            <Card 
+              key={card._id} 
+              card={card} 
+              onCardClick={onCardClick} 
+              onCardLike={onCardLike}
+              onCardRemoval={onCardRemoval}
+            />
+          )}
+        </CurrentUserContext.Provider>
       </section>
     </div>
   )
