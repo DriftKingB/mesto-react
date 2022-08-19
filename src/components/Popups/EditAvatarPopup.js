@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
+export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }) {
   const linkInput = useRef();
   const linkInputError = useRef();
   const [ isValid, setIsValid ] = useState(false);
@@ -41,6 +41,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
       onClose={onClose}
       onSubmit={onSubmit}
       isOpen={isOpen}
+      isLoading={isLoading}
       isValid={isValid}
       inputs={{link: linkInput.current?.value}}
       name="avatar-edit" 
@@ -51,8 +52,15 @@ export default function EditAvatarPopup({ isOpen, onClose, onSubmit }) {
         <fieldset className="popup__input-container">
           <div className="popup__field">
             <input
-            className="popup__input"
-            ref={linkInput} name="avatar" id="avatar-link-input" type="url" placeholder="Ссылка на картинку" required onChange={handleChange} />
+              className="popup__input"
+              ref={linkInput} 
+              name="avatar" 
+              id="avatar-link-input" 
+              type="url" 
+              placeholder="Ссылка на картинку" 
+              required 
+              onChange={handleChange} 
+            />
             <span ref={linkInputError} className="popup__input-error popup__input-error_type_avatar-link-input"></span>
           </div>
         </fieldset>

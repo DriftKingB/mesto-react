@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 
-export default function RemoveCardPopup({ onClose, onSubmit, card }) {
+export default function RemoveCardPopup({ isLoading, onClose, onSubmit, card }) {
   const isOpen = card ? true : false;
 
   return(
@@ -8,6 +8,7 @@ export default function RemoveCardPopup({ onClose, onSubmit, card }) {
         onClose={onClose}
         onSubmit={onSubmit}
         isOpen={isOpen}
+        isLoading={isLoading}
         isValid={true}
         inputs={card}
         name="card-remove" 

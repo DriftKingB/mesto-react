@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
-export default function PopupWithForm({ name, title, submitText, loadingSubmitText, onClose, onSubmit, isOpen, isValid, inputFieldset, inputs }) {
-  const [isLoading, setIsLoading] = useState(false);
+export default function PopupWithForm({ name, title, submitText, loadingSubmitText, onClose, onSubmit, isOpen, isLoading, isValid, inputFieldset, inputs }) {
   const closeByEscapeCallBack = useCallback((evt) => {
     evt.key === 'Escape' && onClose();
   }, []);
@@ -21,12 +20,7 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    setIsLoading(true);
-    onSubmit(inputs)
-      .finally(() => {
-        onClose();
-        setIsLoading(false);
-      });
+    onSubmit(inputs);
   }
 
   return (

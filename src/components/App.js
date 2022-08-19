@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 
-import { CurrentUserContext } from './contexts/CurrentUserContext';
-import api from './utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import api from '../utils/Api';
 
-import ImagePopup from "./components/Popups/ImagePopup";
-import EditProfilePopup from './components/Popups/EditProfilePopup';
-import AddPlacePopup from './components/Popups/AddPlacePopup';
-import EditAvatarPopup from './components/Popups/EditAvatarPopup';
-import RemoveCardPopup from './components/Popups/RemoveCardPopup';
+import ImagePopup from "./Popups/ImagePopup";
+import EditProfilePopup from './Popups/EditProfilePopup';
+import AddPlacePopup from './Popups/AddPlacePopup';
+import EditAvatarPopup from './Popups/EditAvatarPopup';
+import RemoveCardPopup from './Popups/RemoveCardPopup';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -19,13 +19,12 @@ export default function App() {
   const [isEditPopupOpen, setProfilePopupState] = useState(false);
   const [isAddPlacePopupOpen, setCardPopupState] = useState(false);
   const [isEditAvatarPopupOpen, setAvatarPopupState] = useState(false);
-  const [isRemoveCardPopupOpen, setRemovePopupState] = useState(false);
   const [isImagePopupOpen, setImagePopupState] = useState(false);
+  const [popupIsLoading, setPopupIsLoading] = useState(false);
 
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cardToRemove, setCardToRemove] = useState(null);
-
 
   useEffect(() => {
     api.getUserInfo()
@@ -67,47 +66,61 @@ export default function App() {
     setTimeout(() => { setSelectedCard(null) }, 200);
   }
 
-  function handleCardLike(card) {
+  function handleCardLike(card, loadingFunc) {
     const likedByUser = card.likes.some(user => user._id === currentUser._id );
     const request = !likedByUser ? api.putCardLike(card._id) : api.removeCardLike(card._id) ;
 
-    return request
+    loadingFunc(true);
+    request
       .then(res => {
         setCards(cards.map((cardItem) => res._id === cardItem._id ? res : cardItem));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => loadingFunc(false));
   }
 
-  function handleCardRemoval(card) {
-    return api.deleteCard(card._id)
+  function handleCardRemove(card) {
+    setPopupIsLoading(true);
+    api.deleteCard(card._id)
       .then(() => {
         setCards(cards.filter((cardItem) => cardItem._id !== card._id && cardItem ));
+        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setPopupIsLoading(false));
   }
 
   function handleAddPlace({ name, link }) {
-    return api.postSectionItem(name.value, link.value)
+    setPopupIsLoading(true);
+    api.postSectionItem(name.value, link.value)
       .then(res => {
         setCards([res, ...cards]);
+        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setPopupIsLoading(false));
   }
 
   function handleEditProfile({ name, about }) {
-    return api.patchUserInfo(name.value, about.value)
+    setPopupIsLoading(true);
+    api.patchUserInfo(name.value, about.value)
       .then(res => {
         setCurrentUser(res);
+        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setPopupIsLoading(false));
   }
 
   function handleEditAvatar({ link }) {
-    return api.patchUserAvatar(link)
+    setPopupIsLoading(true);
+    api.patchUserAvatar(link)
       .then(res => {
         setCurrentUser(res);
+        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setPopupIsLoading(false));
   }
 
   return (
@@ -129,17 +142,20 @@ export default function App() {
 
       <ImagePopup 
         isOpen={isImagePopupOpen}
+        isLoading={popupIsLoading}
         onClose={closeAllPopups}
         card={selectedCard}
       />
       <AddPlacePopup 
         isOpen={isAddPlacePopupOpen}
+        isLoading={popupIsLoading}
         onClose={closeAllPopups}
         onSubmit={handleAddPlace}
       />
       <RemoveCardPopup 
+        isLoading={popupIsLoading}
         onClose={closeAllPopups}
-        onSubmit={handleCardRemoval} 
+        onSubmit={handleCardRemove} 
         card={cardToRemove}
       />
 
@@ -147,11 +163,13 @@ export default function App() {
         currentUser &&
         <>
           <EditAvatarPopup 
+            isLoading={popupIsLoading}
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onSubmit={handleEditAvatar}
           />
-          <EditProfilePopup 
+          <EditProfilePopup
+            isLoading={popupIsLoading}
             isOpen={isEditPopupOpen} 
             onClose={closeAllPopups}
             onSubmit={handleEditProfile} 

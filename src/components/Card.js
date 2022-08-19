@@ -12,9 +12,7 @@ export default function Card({ card, onCardClick, onCardLike, onCardRemoval }) {
   }
 
   function handleCardLike() {
-    setIsLoading(true);
-    onCardLike(card)
-      .finally(() => { setIsLoading(false) });
+    onCardLike(card, setIsLoading);
   }
 
   function handleCardRemoval() {
