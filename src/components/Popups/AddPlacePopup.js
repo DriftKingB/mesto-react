@@ -40,7 +40,7 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
               onChange={handleChange} 
               value={inputs.name?.value} 
             />
-            <span className="popup__input-error popup__input-error_type_title-input"> { inputs.name?.errorMessage } </span>
+            <span className="popup__input-error"> { inputs.name?.errorMessage } </span>
           </div>
           <div className="popup__field">
             <input
@@ -53,7 +53,7 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
               onChange={handleChange} 
               value={inputs.link?.value} 
             />
-            <span className="popup__input-error popup__input-error_type_link-input"> { inputs.link?.errorMessage } </span>
+            <span className="popup__input-error"> { inputs.link?.errorMessage } </span>
           </div>
         </fieldset>
       } 

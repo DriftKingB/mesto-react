@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route, 
+  Link, 
+  Redirect
+} from 'react-router-dom';
 
+import Register from './AuthForm/Register';
+import Login from './AuthForm/Login';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -14,6 +23,7 @@ import EditAvatarPopup from './Popups/EditAvatarPopup';
 import RemoveCardPopup from './Popups/RemoveCardPopup';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
   const [isEditPopupOpen, setProfilePopupState] = useState(false);
@@ -124,61 +134,72 @@ export default function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser} >
+    <Router>
       <Header />
-      { 
-        (currentUser && cards) &&
-        <Main 
-          onEditProfile={handleEditProfileClick} 
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardRemoval={handleRemoveCardClick}
-          cards={cards}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-        />
-      }
+      <Switch>
+        <Route exact path='/'>
+          {!isLoggedIn && <Redirect to='/sign-in' />}
+          <CurrentUserContext.Provider value={currentUser} >
+            { 
+              (currentUser && cards) &&
+              <Main 
+                onEditProfile={handleEditProfileClick} 
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardRemoval={handleRemoveCardClick}
+                cards={cards}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+              />
+            }
+            <ImagePopup 
+              isOpen={isImagePopupOpen}
+              isLoading={popupIsLoading}
+              onClose={closeAllPopups}
+              card={selectedCard}
+            />
+            <AddPlacePopup 
+              isOpen={isAddPlacePopupOpen}
+              isLoading={popupIsLoading}
+              onClose={closeAllPopups}
+              onSubmit={handleAddPlace}
+            />
+            <RemoveCardPopup 
+              isLoading={popupIsLoading}
+              onClose={closeAllPopups}
+              onSubmit={handleCardRemove} 
+              card={cardToRemove}
+            />
+
+            {
+              currentUser &&
+              <>
+                <EditAvatarPopup 
+                  isLoading={popupIsLoading}
+                  isOpen={isEditAvatarPopupOpen}
+                  onClose={closeAllPopups}
+                  onSubmit={handleEditAvatar}
+                />
+                <EditProfilePopup
+                  isLoading={popupIsLoading}
+                  isOpen={isEditPopupOpen} 
+                  onClose={closeAllPopups}
+                  onSubmit={handleEditProfile} 
+                />
+              </>
+            }      
+          </CurrentUserContext.Provider>
+        </Route>
+        <Route path='/sign-up'>
+          {!isLoggedIn && <Redirect to='/sign-in' />}
+          <Register />
+        </Route>
+        <Route path='/sign-in'>
+          <Login />
+        </Route>
+      </Switch>
       <Footer />
-
-      <ImagePopup 
-        isOpen={isImagePopupOpen}
-        isLoading={popupIsLoading}
-        onClose={closeAllPopups}
-        card={selectedCard}
-      />
-      <AddPlacePopup 
-        isOpen={isAddPlacePopupOpen}
-        isLoading={popupIsLoading}
-        onClose={closeAllPopups}
-        onSubmit={handleAddPlace}
-      />
-      <RemoveCardPopup 
-        isLoading={popupIsLoading}
-        onClose={closeAllPopups}
-        onSubmit={handleCardRemove} 
-        card={cardToRemove}
-      />
-
-      {
-        currentUser &&
-        <>
-          <EditAvatarPopup 
-            isLoading={popupIsLoading}
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onSubmit={handleEditAvatar}
-          />
-          <EditProfilePopup
-            isLoading={popupIsLoading}
-            isOpen={isEditPopupOpen} 
-            onClose={closeAllPopups}
-            onSubmit={handleEditProfile} 
-          />
-        </>
-      }
-      
-      
-    </CurrentUserContext.Provider>
+    </Router>
   );
 }
 

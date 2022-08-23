@@ -20,17 +20,15 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, cards, o
       </section>
 
       <section className="album">
-        <CurrentUserContext.Provider value={currentUser}>
-          {cards.map((card) => 
-            <Card 
-              key={card._id} 
-              card={card} 
-              onCardClick={onCardClick} 
-              onCardLike={onCardLike}
-              onCardRemoval={onCardRemoval}
-            />
-          )}
-        </CurrentUserContext.Provider>
+        {cards.map((card) => 
+          <Card 
+            key={card._id} 
+            card={card} 
+            onCardClick={onCardClick} 
+            onCardLike={onCardLike}
+            onCardRemoval={onCardRemoval}
+          />
+        )}
       </section>
     </div>
   )

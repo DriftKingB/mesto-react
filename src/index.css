@@ -53,10 +53,6 @@
 @import url(./blocks/popup/__input/_invalid/popup__input_invalid.css);
 @import url(./blocks/popup/__input-error/popup__input-error.css);
 @import url(./blocks/popup/__submit-error/popup___submit-error.css);
-@import url(./blocks/popup/__input-error/_type/popup__input-error_type_name-input.css);
-@import url(./blocks/popup/__input-error/_type/popup__input-error_type_about-input.css);
-@import url(./blocks/popup/__input-error/_type/popup__input-error_type_title-input.css);
-@import url(./blocks/popup/__input-error/_type/popup__input-error_type_link-input.css);
 
 @import url(./blocks/popup/__handlers/popup__handlers.css);
 @import url(./blocks/popup/__submit-button/popup__submit-button.css);

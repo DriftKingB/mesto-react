@@ -61,7 +61,7 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }
               required 
               onChange={handleChange} 
             />
-            <span ref={linkInputError} className="popup__input-error popup__input-error_type_avatar-link-input"></span>
+            <span ref={linkInputError} className="popup__input-error"></span>
           </div>
         </fieldset>
       } 

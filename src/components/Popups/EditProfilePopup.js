@@ -33,7 +33,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
         <fieldset className="popup__input-container">
           <div className="popup__field">
             <input
-              className={`popup__input popup__input_type_name ${!(inputs.name?.isValid ?? true) && "popup__input_invalid"}`} 
+              className={`popup__input ${!(inputs.name?.isValid ?? true) && "popup__input_invalid"}`} 
               name="name" 
               id="name-input" 
               type="text" 
@@ -44,11 +44,11 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
               onChange={handleChange} 
               value={inputs.name?.value} 
             />
-            <span className="popup__input-error popup__input-error_type_name-input"> { inputs.name?.errorMessage } </span>
+            <span className="popup__input-error"> { inputs.name?.errorMessage } </span>
           </div>
           <div className="popup__field">
             <input 
-              className={`popup__input popup__input_type_about ${!(inputs.about?.isValid ?? true) && "popup__input_invalid"}`} 
+              className={`popup__input ${!(inputs.about?.isValid ?? true) && "popup__input_invalid"}`} 
               name="about" 
               id="about-input" 
               type="text" 
@@ -59,7 +59,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
               onChange={handleChange} 
               value={inputs.about?.value} 
             />
-            <span className="popup__input-error popup__input-error_type_about-input"> { inputs.about?.errorMessage } </span>
+            <span className="popup__input-error"> { inputs.about?.errorMessage } </span>
           </div>
         </fieldset>
       } 
