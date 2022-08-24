@@ -1,9 +1,11 @@
-.popup__submit-error {
+.form__input-error {
   font-size: 12px;
   line-height: 1.21;
   font-weight: 400;
   color: red;
   position: absolute;
   left: 0;
-  top: calc(100% + 10px);
+  top: calc(100% + 5px);
 }
+
+

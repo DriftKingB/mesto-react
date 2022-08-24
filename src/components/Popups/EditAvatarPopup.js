@@ -15,7 +15,7 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }
 
     linkInputError.textContent = '';
     input.value = null;
-    input.classList.remove('popup__input_invalid');
+    input.classList.remove('form__input_invalid');
   }
 
   function handleInputsUpdate() {
@@ -28,10 +28,10 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }
 
     linkInputError.textContent = input.vaalidationMessage;
     if (!input.validity.valid) {
-      input.classList.add('popup__input_invalid');
+      input.classList.add('form__input_invalid');
       setIsValid(false);
     } else {
-      input.classList.remove('popup__input_invalid');
+      input.classList.remove('form__input_invalid');
       setIsValid(true);
     }
   }
@@ -49,10 +49,10 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }
       submitText="Сохранить"
       loadingSubmitText="Сохранение"
       inputFieldset={
-        <fieldset className="popup__input-container">
-          <div className="popup__field">
+        <fieldset className="form__input-container">
+          <div className="form__field">
             <input
-              className="popup__input"
+              className="form__input"
               ref={linkInput} 
               name="avatar" 
               id="avatar-link-input" 
@@ -61,7 +61,7 @@ export default function EditAvatarPopup({ isOpen, isLoading, onClose, onSubmit }
               required 
               onChange={handleChange} 
             />
-            <span ref={linkInputError} className="popup__input-error"></span>
+            <span ref={linkInputError} className="form__input-error"></span>
           </div>
         </fieldset>
       } 

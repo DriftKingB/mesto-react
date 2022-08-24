@@ -44,25 +44,29 @@
 @import url(./blocks/popup/_type/popup_type_card-delete.css);
 @import url(./blocks/popup/_active/popup_active.css);
 
-@import url(./blocks/popup/__container/popup__container.css);
-@import url(./blocks/popup/__field/popup__field.css);
-@import url(./blocks/popup/__title/popup__title.css);
-@import url(./blocks/popup/__input-container/popup__input-container.css);
-
-@import url(./blocks/popup/__input/popup__input.css);
-@import url(./blocks/popup/__input/_invalid/popup__input_invalid.css);
-@import url(./blocks/popup/__input-error/popup__input-error.css);
-@import url(./blocks/popup/__submit-error/popup___submit-error.css);
-
-@import url(./blocks/popup/__handlers/popup__handlers.css);
-@import url(./blocks/popup/__submit-button/popup__submit-button.css);
-@import url(./blocks/popup/__submit-button/_inactive/popup__submit-button_inactive.css);
-@import url(./blocks/popup/__submit-button-text/popup__submit-button-text.css);
-@import url(./blocks/popup/__loading-icon/popup__loading-icon.css);
-@import url(./blocks/popup/__loading-icon/_active/popup__loading-icon_active.css);
-@import url(./blocks/popup/__close-button/popup__close-button.css);
-
 @import url(./blocks/popup/__image/popup__image.css);
 @import url(./blocks/popup/__image-container/popup__image-container.css);
 @import url(./blocks/popup/__image-title/popup__image-title.css);
+@import url(./blocks/popup/__close-button/popup__close-button.css);
+
+
+
+@import url(./blocks/form/form.css);
+
+@import url(./blocks/form/__field/form__field.css);
+@import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__input-container/form__input-container.css);
+
+@import url(./blocks/form/__input/form__input.css);
+@import url(./blocks/form/__input/_invalid/form__input_invalid.css);
+@import url(./blocks/form/__input-error/form__input-error.css);
+
+@import url(./blocks/form/__handlers/form__handlers.css);
+@import url(./blocks/form/__submit-button/form__submit-button.css);
+@import url(./blocks/form/__submit-button/_inactive/form__submit-button_inactive.css);
+@import url(./blocks/form/__submit-button-text/form__submit-button-text.css);
+@import url(./blocks/form/__loading-icon/form__loading-icon.css);
+@import url(./blocks/form/__loading-icon/_active/form__loading-icon_active.css);
+@import url(./blocks/form/__close-button/form__close-button.css);
+
 

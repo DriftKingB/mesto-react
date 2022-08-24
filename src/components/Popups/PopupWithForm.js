@@ -25,18 +25,18 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
 
   return (
     <section className={`popup popup_type_${name} ${isOpen ? "popup_active" : ""}`} onMouseDown={handleClose} >
-      <form className="popup__container" name={`${name}-form`} onSubmit={handleSubmit}>
-        <h2 className="popup__title">{title}</h2>
-        <button className="popup__close-button" type="button" onClick={onClose} />
+      <form className="form" name={`${name}-form`} onSubmit={handleSubmit}>
+        <h2 className="form__title">{title}</h2>
+        <button className="form__close-button" type="button" onClick={onClose} />
         {inputFieldset}
-        <fieldset className="popup__handlers">
-          <button className={`popup__submit-button ${!isValid && 'popup__submit-button_inactive'}`}>
-            <span className="popup__submit-button-text">
-              <span className="popup__submit-text"> { !(isLoading && isOpen) ? submitText : loadingSubmitText } </span>
-              <span className={`popup__loading-icon ${ isLoading && "popup__loading-icon_active" }`} />
+        <fieldset className="form__handlers">
+          <button className={`form__submit-button ${!isValid && 'form__submit-button_inactive'}`}>
+            <span className="form__submit-button-text">
+              <span className="form__submit-text"> { !(isLoading && isOpen) ? submitText : loadingSubmitText } </span>
+              <span className={`form__loading-icon ${ isLoading && "form__loading-icon_active" }`} />
             </span>
           </button>
-          <span className="popup__submit-error"></span>
+          <span className="form__submit-error"></span>
         </fieldset>
       </form>
     </section>

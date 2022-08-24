@@ -1,8 +1,8 @@
-.popup__loading-icon {
+.form__loading-icon {
   display: none;
 }
 
-.popup__loading-icon:after {
+.form__loading-icon:after {
   position: absolute;
   bottom: -1px;
   left: 100%;

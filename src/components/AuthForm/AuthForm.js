@@ -1,6 +1,8 @@
-export default function AuthForm({ inputFieldset }) {
+export default function AuthForm({ name, title, submitText, loadingSubmitText, onSubmit, isLoading, isValid, inputFieldset }) {
+  const isOpen = true;
+
   return(
-    <form className="auth-form" name={`${name}-form`} onSubmit={handleSubmit}>
+    <form className="auth-form" name={`${name}-form`} onSubmit={onSubmit}>
       <h2 className="auth-form__title">{title}</h2>      
       {inputFieldset}
       <fieldset className="auth-form__handlers">

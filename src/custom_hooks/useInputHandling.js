@@ -7,8 +7,9 @@ export default function useInputHandling({ defaultInputs, defaultInputIsValidSta
   useEffect(() => {
     if (isOpen) {
       const someInputIsInvalid = Object.values(inputs).some(input => !(input?.isValid ?? defaultInputIsValidState));
-
+      console.log(inputs)
       !someInputIsInvalid ? (isValid.current = true) : (isValid.current = false);
+      console.log(isValid.current)
     }
   }, [inputs]);
 

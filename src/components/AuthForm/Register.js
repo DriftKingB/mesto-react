@@ -1,6 +1,8 @@
 import AuthForm from "./AuthForm";
+import useInputHandling from "../../custom_hooks/useInputHandling";
 
-export default function Register({ onSubmit }) {
+export default function Register({ onSubmit, isLoading }) {
+  const isOpen = true;
   const hookConfig = {
     defaultInputs: { email: { value: '' }, password: { value: '' } },
     defaultInputIsValidState: false

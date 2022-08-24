@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import useInputHandling from "../../custom hooks/useInputHandling";
+import useInputHandling from "../../custom_hooks/useInputHandling";
 import PopupWithForm from "./PopupWithForm";
 
 export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit }) {
@@ -30,10 +30,10 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
       submitText="Сохранить"
       loadingSubmitText="Сохранение"
       inputFieldset={
-        <fieldset className="popup__input-container">
-          <div className="popup__field">
+        <fieldset className="form__input-container">
+          <div className="form__field">
             <input
-              className={`popup__input ${!(inputs.name?.isValid ?? true) && "popup__input_invalid"}`} 
+              className={`form__input ${!(inputs.name?.isValid ?? true) && "form__input_invalid"}`} 
               name="name" 
               id="name-input" 
               type="text" 
@@ -44,11 +44,11 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
               onChange={handleChange} 
               value={inputs.name?.value} 
             />
-            <span className="popup__input-error"> { inputs.name?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.name?.errorMessage } </span>
           </div>
-          <div className="popup__field">
+          <div className="form__field">
             <input 
-              className={`popup__input ${!(inputs.about?.isValid ?? true) && "popup__input_invalid"}`} 
+              className={`form__input ${!(inputs.about?.isValid ?? true) && "form__input_invalid"}`} 
               name="about" 
               id="about-input" 
               type="text" 
@@ -59,7 +59,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
               onChange={handleChange} 
               value={inputs.about?.value} 
             />
-            <span className="popup__input-error"> { inputs.about?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.about?.errorMessage } </span>
           </div>
         </fieldset>
       } 

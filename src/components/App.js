@@ -195,7 +195,7 @@ export default function App() {
           <Register />
         </Route>
         <Route path='/sign-in'>
-          <Login />
+          {/* <Login /> */}
         </Route>
       </Switch>
       <Footer />

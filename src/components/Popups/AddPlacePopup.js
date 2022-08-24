@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
-import useInputHandling from "../../custom hooks/useInputHandling";
+import useInputHandling from "../../custom_hooks/useInputHandling";
 
 export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) {
   const hookConfig = {
@@ -26,10 +26,10 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
       submitText="Создать"
       loadingSubmitText="Создание"
       inputFieldset={
-        <fieldset className="popup__input-container">
-          <div className="popup__field">
+        <fieldset className="form__input-container">
+          <div className="form__field">
             <input  
-              className={`popup__input ${!(inputs.name?.isValid ?? true) && "popup__input_invalid"}`}
+              className={`form__input ${!(inputs.name?.isValid ?? true) && "form__input_invalid"}`}
               name="name" 
               id="title-input" 
               type="text" 
@@ -40,11 +40,11 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
               onChange={handleChange} 
               value={inputs.name?.value} 
             />
-            <span className="popup__input-error"> { inputs.name?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.name?.errorMessage } </span>
           </div>
-          <div className="popup__field">
+          <div className="form__field">
             <input
-              className={`popup__input ${!(inputs.link?.isValid ?? true) && "popup__input_invalid"}`}
+              className={`form__input ${!(inputs.link?.isValid ?? true) && "form__input_invalid"}`}
               name="link" 
               id="link-input" 
               type="url" 
@@ -53,7 +53,7 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
               onChange={handleChange} 
               value={inputs.link?.value} 
             />
-            <span className="popup__input-error"> { inputs.link?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.link?.errorMessage } </span>
           </div>
         </fieldset>
       } 
