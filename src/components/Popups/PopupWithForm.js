@@ -30,7 +30,7 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
         <button className="form__close-button" type="button" onClick={onClose} />
         {inputFieldset}
         <fieldset className="form__handlers">
-          <button className={`form__submit-button ${!isValid && 'form__submit-button_inactive'}`}>
+          <button className={`form__submit-button ${!isValid && 'form__submit-button_inactive'}`} disabled={!isValid} >
             <span className="form__submit-button-text">
               <span className="form__submit-text"> { !(isLoading && isOpen) ? submitText : loadingSubmitText } </span>
               <span className={`form__loading-icon ${ isLoading && "form__loading-icon_active" }`} />
