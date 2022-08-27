@@ -10,7 +10,11 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
     defaultInputIsValidState: true
   }
   const [ inputs, isValid, handleInputsUpdate, handleChange ] = useInputHandling(hookConfig, isOpen);
-  
+
+  // useEffect(() => {
+  //   console.log('popup', isValid)
+  // }, [isValid])
+
   useEffect(() => {
     const delay = isOpen ? 0 : 200; 
 
@@ -30,10 +34,10 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
       submitText="Сохранить"
       loadingSubmitText="Сохранение"
       inputFieldset={
-        <fieldset className="form__input-container">
+        <fieldset className={`form__input-container form__input-container_type_popup`}>
           <div className="form__field">
             <input
-              className={`form__input ${!(inputs.name?.isValid ?? true) && "form__input_invalid"}`} 
+              className={`form__input form__input_type_popup ${!(inputs.name?.isValid ?? true) ? 'form__input_invalid' : ''}`} 
               name="name" 
               id="name-input" 
               type="text" 
@@ -48,7 +52,7 @@ export default function EditProfilePopup({ isOpen, isLoading, onClose, onSubmit 
           </div>
           <div className="form__field">
             <input 
-              className={`form__input ${!(inputs.about?.isValid ?? true) && "form__input_invalid"}`} 
+              className={`form__input form__input_type_popup ${!(inputs.about?.isValid ?? true) ? 'form__input_invalid' : ''}`} 
               name="about" 
               id="about-input" 
               type="text" 

@@ -7,8 +7,8 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import Register from './AuthForm/Register';
-import Login from './AuthForm/Login';
+import Register from './AuthForms/Register';
+import Login from './AuthForms/Login';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -189,16 +189,19 @@ export default function App() {
               </>
             }      
           </CurrentUserContext.Provider>
+          <Footer />
         </Route>
         <Route path='/sign-up'>
           {!isLoggedIn && <Redirect to='/sign-in' />}
-          <Register />
+          <Register 
+            onSubmit={() => {}}
+            isLoading={false}
+          />
         </Route>
         <Route path='/sign-in'>
           {/* <Login /> */}
         </Route>
       </Switch>
-      <Footer />
     </Router>
   );
 }

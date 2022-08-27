@@ -1,0 +1,7 @@
+.form_type_popup {  
+  position: absolute;
+  top: calc(50vh - 165px);
+  left: calc(50vw - 215px);
+  background-color: #fff;
+  color: #000;
+}

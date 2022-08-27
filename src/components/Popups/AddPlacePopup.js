@@ -26,10 +26,10 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
       submitText="Создать"
       loadingSubmitText="Создание"
       inputFieldset={
-        <fieldset className="form__input-container">
+        <fieldset className="form__input-container form__input-container_type_popup">
           <div className="form__field">
             <input  
-              className={`form__input ${!(inputs.name?.isValid ?? true) && "form__input_invalid"}`}
+              className={`form__input form__input_type_popup ${!(inputs.name?.isValid ?? true) ? 'form__input_invalid' : ''}`}
               name="name" 
               id="title-input" 
               type="text" 
@@ -44,7 +44,7 @@ export default function AddPlacePopup({ isOpen, isLoading, onClose, onSubmit }) 
           </div>
           <div className="form__field">
             <input
-              className={`form__input ${!(inputs.link?.isValid ?? true) && "form__input_invalid"}`}
+              className={`form__input form__input_type_popup ${!(inputs.link?.isValid ?? true) ? 'form__input_invalid' : ''}`}
               name="link" 
               id="link-input" 
               type="url" 

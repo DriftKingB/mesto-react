@@ -1,4 +1,4 @@
-import AuthForm from "./AuthForm";
+import Form from "../Form";
 import useInputHandling from "../../custom_hooks/useInputHandling";
 
 export default function Register({ onSubmit, isLoading }) {
@@ -7,10 +7,12 @@ export default function Register({ onSubmit, isLoading }) {
     defaultInputs: { email: { value: '' }, password: { value: '' } },
     defaultInputIsValidState: false
   }
-  const [ inputs, isValid, handleChange ] = useInputHandling(hookConfig, isOpen);
+  const [ inputs, isValid, handleInputsUpdate, handleChange ] = useInputHandling(hookConfig, isOpen);
 
+  
   return(
-    <AuthForm
+    <Form
+      type='auth'
       onSubmit={onSubmit}
       isLoading={isLoading}
       isValid={isValid}
@@ -18,11 +20,12 @@ export default function Register({ onSubmit, isLoading }) {
       name="register" 
       title="Регистрация" 
       submitText="Зарегистрироваться"
+      submitSubline='Уже зарегистрированы?'
       inputFieldset={
-        <fieldset className="auth-form__input-container">
-          <div className="auth-form__field">
+        <fieldset className="form__input-container form__input-container_type_auth">
+          <div className="form__field">
             <input
-              className={`auth-form__input ${!(inputs.email?.isValid ?? true) && "auth-form__input_invalid"}`} 
+              className={`form__input form__input_type_auth ${!(inputs.email?.isValid ?? true) ? 'form__input_invalid' : ''}`} 
               name="email" 
               id="email-input" 
               type="email" 
@@ -31,11 +34,11 @@ export default function Register({ onSubmit, isLoading }) {
               onChange={handleChange} 
               value={inputs.email?.value} 
             />
-            <span className="auth-form__input-error"> { inputs.email?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.email?.errorMessage } </span>
           </div>
-          <div className="auth-form__field">
+          <div className="form__field">
             <input 
-              className={`auth-form__input ${!(inputs.password?.isValid ?? true) && "auth-form__input_invalid"}`} 
+              className={`form__input form__input_type_auth ${!(inputs.password?.isValid ?? true) ? 'form__input_invalid' : ''}`} 
               name="password" 
               id="password-input" 
               type="password" 
@@ -46,7 +49,7 @@ export default function Register({ onSubmit, isLoading }) {
               onChange={handleChange} 
               value={inputs.password?.value} 
             />
-            <span className="auth-form__input-error"> { inputs.password?.errorMessage } </span>
+            <span className="form__input-error"> { inputs.password?.errorMessage } </span>
           </div>
         </fieldset>
       } 

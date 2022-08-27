@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect } from "react"
+import Form from "../Form";
 
 export default function PopupWithForm({ name, title, submitText, loadingSubmitText, onClose, onSubmit, isOpen, isLoading, isValid, inputFieldset, inputs }) {
   const closeByEscapeCallBack = useCallback((evt) => {
@@ -25,20 +26,20 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
 
   return (
     <section className={`popup popup_type_${name} ${isOpen ? "popup_active" : ""}`} onMouseDown={handleClose} >
-      <form className="form" name={`${name}-form`} onSubmit={handleSubmit}>
-        <h2 className="form__title">{title}</h2>
-        <button className="form__close-button" type="button" onClick={onClose} />
-        {inputFieldset}
-        <fieldset className="form__handlers">
-          <button className={`form__submit-button ${!isValid && 'form__submit-button_inactive'}`} disabled={!isValid} >
-            <span className="form__submit-button-text">
-              <span className="form__submit-text"> { !(isLoading && isOpen) ? submitText : loadingSubmitText } </span>
-              <span className={`form__loading-icon ${ isLoading && "form__loading-icon_active" }`} />
-            </span>
-          </button>
-          <span className="form__submit-error"></span>
-        </fieldset>
-      </form>
+      <Form
+        type='popup'
+        onClose={onClose}
+        onSubmit={handleSubmit}
+        isOpen={isOpen}
+        isLoading={isLoading}
+        isValid={isValid}
+        inputs={inputs}
+        name={name} 
+        title={title} 
+        submitText={submitText}
+        loadingSubmitText={loadingSubmitText}
+        inputFieldset={inputFieldset}
+      />
     </section>
   )
 }

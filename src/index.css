@@ -52,19 +52,28 @@
 
 
 @import url(./blocks/form/form.css);
+@import url(./blocks/form/_type/form_type_auth.css);
+@import url(./blocks/form/_type/form_type_popup.css);
 
 @import url(./blocks/form/__field/form__field.css);
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/form/__input-container/form__input-container.css);
+@import url(./blocks/form/__input-container/_type/form__input-container_type_auth.css);
+@import url(./blocks/form/__input-container/_type/form__input-container_type_popup.css);
 
 @import url(./blocks/form/__input/form__input.css);
+@import url(./blocks/form/__input/_type/form__input_type_auth.css);
+@import url(./blocks/form/__input/_type/form__input_type_popup.css);
 @import url(./blocks/form/__input/_invalid/form__input_invalid.css);
 @import url(./blocks/form/__input-error/form__input-error.css);
 
 @import url(./blocks/form/__handlers/form__handlers.css);
 @import url(./blocks/form/__submit-button/form__submit-button.css);
+@import url(./blocks/form/__submit-button/_type/form__submit-button_type_auth.css);
+@import url(./blocks/form/__submit-button/_type/form__submit-button_type_popup.css);
 @import url(./blocks/form/__submit-button/_inactive/form__submit-button_inactive.css);
 @import url(./blocks/form/__submit-button-text/form__submit-button-text.css);
+@import url(./blocks/form/__submit-subline/form___submit-subline.css);
 @import url(./blocks/form/__loading-icon/form__loading-icon.css);
 @import url(./blocks/form/__loading-icon/_active/form__loading-icon_active.css);
 @import url(./blocks/form/__close-button/form__close-button.css);
