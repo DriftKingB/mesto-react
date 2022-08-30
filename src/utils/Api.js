@@ -1,4 +1,4 @@
-import { settingsForApi } from "./constants";
+import { apiConfig } from "./constants";
 
 class Api {
   constructor({ baseUrl, headers }) {
@@ -86,4 +86,4 @@ class Api {
   }
 }
 
-export default new Api(settingsForApi);
+export default new Api(apiConfig);

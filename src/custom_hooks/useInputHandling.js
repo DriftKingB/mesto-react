@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function useInputHandling({ defaultInputs, defaultInputIsValidState }, isOpen) {
+export default function useInputHandling({ defaultInputs, defaultInputIsValidState }, isOpen = true) {
   const [ inputs, setInputs ] = useState(defaultInputs);
   const [ isValid, setIsValid ] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       const someInputIsInvalid = Object.values(inputs).some(input => !(input?.isValid ?? defaultInputIsValidState));
-      console.log(inputs)
 
       !someInputIsInvalid ? setIsValid(true) : setIsValid(false);
     }
@@ -24,7 +23,6 @@ export default function useInputHandling({ defaultInputs, defaultInputIsValidSta
     const value = input.value;
     const isValid = input.validity.valid;
     const errorMessage = input.validationMessage;
-    console.log(value)
 
     setInputs({ ...inputs, [input.name]: { value, isValid, errorMessage } });
   }

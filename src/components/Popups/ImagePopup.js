@@ -18,7 +18,7 @@ export default function ImagePopup({ isOpen, card, onClose }) {
   }
 
   return (
-    <section className={`popup popup_type_image-view ${isOpen && "popup_active"}`} onMouseDown={handleClose} >
+    <section className={`popup popup_type_image-view ${isOpen ? "popup_active" : ''}`} onMouseDown={handleClose} >
       <div className="popup__image-container">
         <button className="popup__close-button" type="button" onClick={onClose} />
         <img className="popup__image" src={card?.link} alt={card?.name} />

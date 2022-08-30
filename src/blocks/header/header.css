@@ -1,8 +1,11 @@
 .header {
   margin: 45px auto 0;
   width: 880px;
+  height: 74px;
   border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
-  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 @media (max-width: 1280px) {

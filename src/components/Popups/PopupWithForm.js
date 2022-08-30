@@ -26,20 +26,22 @@ export default function PopupWithForm({ name, title, submitText, loadingSubmitTe
 
   return (
     <section className={`popup popup_type_${name} ${isOpen ? "popup_active" : ""}`} onMouseDown={handleClose} >
-      <Form
-        type='popup'
-        onClose={onClose}
-        onSubmit={handleSubmit}
-        isOpen={isOpen}
-        isLoading={isLoading}
-        isValid={isValid}
-        inputs={inputs}
-        name={name} 
-        title={title} 
-        submitText={submitText}
-        loadingSubmitText={loadingSubmitText}
-        inputFieldset={inputFieldset}
-      />
+      <div className="popup__container">
+        <Form
+          type='popup'
+          onSubmit={handleSubmit}
+          isOpen={isOpen}
+          isLoading={isLoading}
+          isValid={isValid}
+          inputs={inputs}
+          name={name} 
+          title={title} 
+          submitText={submitText}
+          loadingSubmitText={loadingSubmitText}
+          inputFieldset={inputFieldset}
+        />
+        <button className="popup__close-button" type="button" onClick={onClose} />
+      </div>
     </section>
   )
 }
